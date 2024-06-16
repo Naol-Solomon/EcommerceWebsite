@@ -49,9 +49,27 @@ if (isset($_POST['add_to_cart'])) {
     
  //to remove product from cart
 }else if (isset($_POST['remove_product'])){
+
   unset($_SESSION['cart'][$_POST['product_id']]);
-}
- else {
+
+}else if(isset($_POST['edit_quantity'])){
+   
+  //get id and quantity from the form
+  $product_id = $_POST['product_id'];
+  $product_quantity = $_POST['product_quantity'];
+
+ //get the product array from the the session
+ $product_array = $_SESSION['cart'][$product_id];
+
+ //update the product array with the new quantity
+ $product_array['product_quantity'] = $product_quantity;
+
+ $_SESSION['cart'][$product_id] = $product_array;
+ 
+
+
+
+}else {
     header('Location: index.php');
 }
 ?>
@@ -135,8 +153,13 @@ if (isset($_POST['add_to_cart'])) {
                     </div>
                 </td>
                 <td>
-                    <input type="number" value="<?php echo $value['product_quantity'] ;?>" />
-                    <a class="edit-btn" href="#">Edit</a>
+  
+                    <form action="cart.php" method="POST">
+                      <input type="hidden" name="product_id" value="<?php echo $value['product_id']; ?>"/>  
+                      <input type="number" name="product_quantity" value="<?php echo $value['product_quantity'] ;?>" /> 
+                      <input type="submit" class="edit-btn"  value="edit" name="edit_quantity"/>                  
+                    </form>
+                    
                 </td>
                 <td>
                     <span><?php echo $subtotal ?></span>

@@ -352,6 +352,8 @@ footer .copyright img{
     color: rgb(0, 179, 255);;
     text-decoration: none;
     font-size: 15px;
+    background-color: #fff;
+    border: none;
  }
 
  .cart td input{
