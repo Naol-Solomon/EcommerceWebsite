@@ -21,10 +21,6 @@ else {
 
 
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,7 +70,7 @@ else {
 
         <?php while($row = $result->fetch_assoc()){ ?>
             <div class="col-lg-5 col-md-6 col-sm-12">
-                <img  id="main-img"class="img-fluid w-100 pb-1" src="./assets/imgs/<?php echo $row['product_image']?>" />;
+                <img  id="main-img"class="img-fluid w-100 pb-1" src="./assets/imgs/<?php echo $row['product_image']?>" />
                 <div class="small-img-group pt-2">
                     <div class="small-img-col">
                         <img src="./assets/imgs/<?php echo $row['product_image']?>" width="100%" class="small-img"/>
@@ -91,20 +87,18 @@ else {
                 </div>
             </div>
 
-         
-
             <div class="col-lg-6 col-md-12 col-12">
                 <h6>Men/Shoes</h6>
                 <h3 class="py-4"><?php echo $row['product_name']?></h3>
                 <h2><?php echo $row['product_price'] ?></h2>
 
                 <form method="POST" action="cart.php">
-
-                <input type="hidden" name="product-name" value="<?php echo $row['product_name'] ?>" />;
-                <input type="hidden" name="product-image" value="<?php echo $row['product_image'] ?>" />;
-                <input type="hidden" name="product-price" value="<?php echo $row['product_price'] ?>" />;
+                <input type="hidden" name="product_id" value="<?php echo $row['product_id']?>" />
+                <input type="hidden" name="product_name" value="<?php echo $row['product_name'] ?>" />
+                <input type="hidden" name="product_image" value="<?php echo $row['product_image'] ?>" />
+                <input type="hidden" name="product_price" value="<?php echo $row['product_price'] ?>" />
                 <input type="number" name="product_quantity" value="1"/>
-                <button class="buy-btn" type="submit" name="add-to-cart">Add To Cart</button>
+                <button class="buy-btn" type="submit" name="add_to_cart">Add To Cart</button>
                 </form>
                
                 <h4 class="mt-5 mb-5">Product details</h4>
