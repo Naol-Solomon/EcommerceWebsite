@@ -1,5 +1,4 @@
 <?php 
-require ("./server/get_shoes.php");
 
 session_start();
 
@@ -47,7 +46,12 @@ if (isset($_POST['add_to_cart'])) {
         $_SESSION['cart'][$product_id] = $product_array;
     }
 
-} else {
+    
+ //to remove product from cart
+}else if (isset($_POST['remove_product'])){
+  unset($_SESSION['cart'][$_POST['product_id']]);
+}
+ else {
     header('Location: index.php');
 }
 ?>
@@ -107,43 +111,49 @@ if (isset($_POST['add_to_cart'])) {
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
-           <?php foreach($_SESSION['cart'] as $value) { ?> 
+            <?php 
+            $total = 0;
+            foreach($_SESSION['cart'] as $value) { 
+                $subtotal = $value['product_price'] * $value['product_quantity'];
+                $total += $subtotal;
+            ?> 
+
             <tr>
                 <td>
                     <div class="product-info">
-                        <img src="assets/imgs/<?php echo $value['product_image'] ?>"/>
+                        <img src="assets/imgs/<?php echo $value['product_image'] ;?>"/>
                         <div>
-                            <p><?php echo $value['product_name']?></p>
-                            <small><span><?php echo $value['product_price']?></span>Birr</small>
+                            <p><?php echo $value['product_name']; ?></p>
+                            <small><span><?php echo $value['product_price']; ?></span> Birr</small>
                             <br>
-                            <a class="remove-btn" href="#">Remove</a>
+                            <form action="cart.php" method="POST">
+                              <input type="hidden" name="product_id" value="<?php echo $value['product_id'] ;?>" />
+                              <input type="submit" name="remove_product" class="remove-btn" value="Remove" />
+                            </form>
+
                         </div>
                     </div>
                 </td>
                 <td>
-                    <input type="number" value=" <?php echo $value['product_quantity']?>" />
+                    <input type="number" value="<?php echo $value['product_quantity'] ;?>" />
                     <a class="edit-btn" href="#">Edit</a>
                 </td>
-
                 <td>
-                    <span>4000</span>
+                    <span><?php echo $subtotal ?></span>
                     <span class="product-price">Birr</span>
                 </td>
             </tr>
-            
-            </table>
-        </div>
-        <?php } ?>
-
+            <?php } ?>
+        </table>
         <div class="cart-total">
             <table>
                 <tr>
                     <td>Subtotal</td>
-                    <td>2000 Birr</td>
+                    <td><?php echo $total ?> Birr</td>
                 </tr>
                 <tr>
                     <td>Total</td>
-                    <td>4000 Birr</td>
+                    <td><?php echo $total ?> Birr</td>
                 </tr>
             </table>
         </div>
@@ -152,9 +162,8 @@ if (isset($_POST['add_to_cart'])) {
         </div>
     </section>
 
-
           <!--Footer-->
-    <footer  class="mt-5 py-5">
+        <footer  class="mt-5 py-5">
         <div class="row container">
           <div class="footer-one col-lg-3 col-md-6 col-sm-12">
             <img class="logo" src="./assets/imgs/logo.jpg"/>
@@ -189,11 +198,11 @@ if (isset($_POST['add_to_cart'])) {
           <div class="footer-one col-lg-3 col-md-6 col-sm-12">
               <h5 class="pb-2">Instagram</h5>
               <div class="row">
-                <img src="./assets/imgs/clothe4.jpg" class="img-fluid w-25 h-100 m-2"/>
+                <img src="./assets/imgs/clothes4.jpg" class="img-fluid w-25 h-100 m-2"/>
                 <img src="./assets/imgs/backpack4.jpg" class="img-fluid w-25 h-100 m-2"/>
                 <img src="./assets/imgs/feature3.jpg" class="img-fluid w-25 h-100 m-2"/>
                 <img src="./assets/imgs/feature4.jpg" class="img-fluid w-25 h-100 m-2"/>
-                <img src="./assets/imgs/clothe1.jpg" class="img-fluid w-25 h-100 m-2"/>
+                <img src="./assets/imgs/clothes1.jpg" class="img-fluid w-25 h-100 m-2"/>
               </div>
           </div>
         </div>

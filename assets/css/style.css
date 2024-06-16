@@ -338,9 +338,16 @@ footer .copyright img{
 
  .cart td a{
     color:rgb(0, 179, 255);;
- }
+ } 
 
- .cart .remove-btn,
+ .cart .remove-btn{
+    color: rgb(0, 179, 255);;
+    text-decoration: none;
+    font-size: 15px;
+    background-color: #fff;
+    border: none;
+    width: 100%;
+ }
  .cart .edit-btn{
     color: rgb(0, 179, 255);;
     text-decoration: none;
