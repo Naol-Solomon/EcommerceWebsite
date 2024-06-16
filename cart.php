@@ -170,14 +170,12 @@ if (isset($_POST['add_to_cart'])) {
         </table>
         <div class="cart-total">
             <table>
-                <tr>
-                    <td>Subtotal</td>
-                    <td><?php echo $total ?> Birr</td>
-                </tr>
+
                 <tr>
                     <td>Total</td>
                     <td><?php echo $total ?> Birr</td>
                 </tr>
+                
             </table>
         </div>
         <div class="checkout-container">
