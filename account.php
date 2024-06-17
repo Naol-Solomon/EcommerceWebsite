@@ -1,23 +1,30 @@
 <?php 
 session_start();
 
-// if(isset($_SESSION['logged_in'])){
-//   header('location: login.php');
-//   exit();
-// }
+if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true){
+  header('location: login.php');
+  exit();
+}
 
 
+if(isset($_GET['logout'])){
+  if (isset($_SESSION['logged_in'])){
+    unset($_SESSION['logged_in']);
+    unset($_SESSION['user_email']);
+    unset($_SESSION['user_name']);
+
+    header('location: login.php');
+    exit();
+  }
+}
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Account</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css" />
@@ -34,10 +41,10 @@ session_start();
                 <h3 class="font-weight-bold">Account info</h3>
                 <hr class="mx-auto">
                 <div class="account-info">
-                    <p>Name: <span><?php if(isset($_SESSION['user_name'])) {echo $_SESSION['user_name']; } ?></span></p>
-                    <p>Email: <span><?php if(isset($_SESSION['user_email'])){echo $_SESSION['user_email']; } ?></span></p>
+                    <p>Name: <span><?php if(isset($_SESSION['user_name'])) { echo $_SESSION['user_name']; } ?></span></p>
+                    <p>Email: <span><?php if(isset($_SESSION['user_email'])){ echo $_SESSION['user_email']; } ?></span></p>
                     <p><a href="#orders" id="order-btn">Your orders</a></p>
-                    <p><a href="" id="logout-btn">Logout</a></p>
+                    <p><a href="account.php?logout=1" id="logout-btn">Logout</a></p> <!-- Correct logout link -->
                 </div>
             </div>
 
@@ -93,5 +100,5 @@ session_start();
     <!--Footer-->
      <?php require ("footer.php")?>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        </body>
-        </html>
+</body>
+</html>

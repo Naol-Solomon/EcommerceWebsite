@@ -51,45 +51,39 @@ if (isset($_POST['add_to_cart'])) {
 
 
  //to remove product from cart
-}else if (isset($_POST['remove_product'])){
+    }else if (isset($_POST['remove_product'])){
 
-  unset($_SESSION['cart'][$_POST['product_id']]);
+    unset($_SESSION['cart'][$_POST['product_id']]);
 
-}else if(isset($_POST['edit_quantity'])){
-   
-  //get id and quantity from the form
-  $product_id = $_POST['product_id'];
-  $product_quantity = $_POST['product_quantity'];
+    }else if(isset($_POST['edit_quantity'])){
+    
+    //get id and quantity from the form
+    $product_id = $_POST['product_id'];
+    $product_quantity = $_POST['product_quantity'];
 
- //get the product array from the the session
- $product_array = $_SESSION['cart'][$product_id];
+    //get the product array from the the session
+    $product_array = $_SESSION['cart'][$product_id];
 
- //update the product array with the new quantity
- $product_array['product_quantity'] = $product_quantity;
+    //update the product array with the new quantity
+    $product_array['product_quantity'] = $product_quantity;
 
- $_SESSION['cart'][$product_id] = $product_array;
- 
-
-
-
-}else {
-    header('Location: index.php');
+    $_SESSION['cart'][$product_id] = $product_array;
 }
 
-  function calculateTotalCart(){
-      $total = 0;
+function calculateTotalCart(){
+    $total = 0;
 
-      foreach ($_SESSION['cart'] as $key=>$value) {
-          $product = $_SESSION['cart'][$key]; // fetch all data from cart
+    foreach ($_SESSION['cart'] as $key=>$value) {
+        $price = $value['product_price'];
+        $quantity = $value['product_quantity'];
 
-          $price = $product['product_price'];
-          $quantity = $product['product_quantity'];
+        $subtotal = $price * $quantity;
+        $total += $subtotal;
+    }
 
-          $total = $total + ($price * $quantity);
-      }
+    $_SESSION['total'] = $total;
+}
 
-      $_SESSION['total'] = $total; //return total
-  }
 ?>
 
 <!DOCTYPE html>
@@ -120,7 +114,6 @@ if (isset($_POST['add_to_cart'])) {
                 <th>Subtotal</th>
             </tr>
             <?php 
-            $total = 0;
             foreach($_SESSION['cart'] as $value) { 
                 $subtotal = $value['product_price'] * $value['product_quantity'];
             ?> 
