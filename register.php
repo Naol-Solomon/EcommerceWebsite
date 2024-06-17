@@ -2,6 +2,11 @@
 session_start();
 require ("./server/connection.php");
 
+if(isset($_SESSION['logged_in'])){
+  header('location: account.php');
+  exit();
+}
+
 if (isset($_POST['register'])){
 
    $name = $_POST['name'];
@@ -24,13 +29,13 @@ if (isset($_POST['register'])){
      $stmt1 = $conn->prepare("SELECT count(*) FROM users WHERE user_email=?");
      $stmt1->bind_param('s', $email);
      $stmt1->execute();
-     $stmt1->bind_result($num_rows);
+     $stmt1->bind_result($num_rows); // return true or false
      $stmt1->store_result();
      $stmt1->fetch();
  
     //check if there is a user already registered with this email
      if($num_rows != 0){
-       header('location: register.php?error=email already exists');
+       header('location: register.php?error=User already exists');
      }
  
     //create a new user
@@ -43,6 +48,7 @@ if (isset($_POST['register'])){
         $_SESSION['user_email'] = $email;
         $_SESSION['user_name'] = $name;
         $_SESSION['logged_in'] = true;
+
         header('location: account.php? register=You registered successfully');
       }else{
         header('location: register.php? error= Could not create account at the moment');
@@ -52,6 +58,7 @@ if (isset($_POST['register'])){
 
 
    }
+   //if user has already registered, then take  user to account page
   }
   
    
@@ -120,7 +127,7 @@ if (isset($_POST['register'])){
                   <input type="submit" class="btn" id="register-btn" name="register" value="Register" />
             </div>
             <div class="form-group">
-              <a id="login-url" class="btn">Do you have  an account? Login</a>
+              <a id="login-url"href="login.php" class="btn">Do you have  an account? Login</a>
             </div>
           </form>
         </div>

@@ -79,8 +79,8 @@ if (isset($_POST['add_to_cart'])) {
   function calculateTotalCart(){
       $total = 0;
 
-      foreach ($_SESSION['cart'] as $key => $value) {
-          $product = $_SESSION['cart'][$key];
+      foreach ($_SESSION['cart'] as $key=>$value) {
+          $product = $_SESSION['cart'][$key]; // fetch all data from cart
 
           $price = $product['product_price'];
           $quantity = $product['product_quantity'];
@@ -151,7 +151,7 @@ if (isset($_POST['add_to_cart'])) {
                     
                 </td>
                 <td>
-                    <span><?php echo $subtotal ?></span>
+                    <span><?php echo $subtotal?></span>
                     <span class="product-price">Birr</span>
                 </td>
             </tr>
