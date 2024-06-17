@@ -3,7 +3,7 @@ session_start();
 require("./server/connection.php");
 
 if(isset($_SESSION['logged_in'])){
-  header('Location: account.php');
+  header('location: account.php');
   exit();
 }
 
@@ -30,7 +30,7 @@ if(isset($_POST['login_btn'])){
 
         header('Location: account.php?message=Logged in Successfully');
     }else{
-      header('Location: account.php?error=There is no credentials with this account');
+      header('location: account.php?error=There is no credentials with this account');
     }
 
   }else{
