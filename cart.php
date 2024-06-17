@@ -88,7 +88,7 @@ if (isset($_POST['add_to_cart'])) {
           $total = $total + ($price * $quantity);
       }
 
-      $_SESSION['total'] = $total;
+      $_SESSION['total'] = $total; //return total
   }
 ?>
 
@@ -123,7 +123,6 @@ if (isset($_POST['add_to_cart'])) {
             $total = 0;
             foreach($_SESSION['cart'] as $value) { 
                 $subtotal = $value['product_price'] * $value['product_quantity'];
-                $total += $subtotal;
             ?> 
 
             <tr>

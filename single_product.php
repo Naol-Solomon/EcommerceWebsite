@@ -10,7 +10,7 @@ if (isset($_GET['product_id'])){
 
   $stmt->execute();
 
-  $product  = $stmt->get_result();
+  $product  = $stmt->get_result(); // return array
 }
 
 else {

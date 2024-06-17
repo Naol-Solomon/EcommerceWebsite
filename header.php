@@ -11,7 +11,7 @@
               <a class="nav-link " href="index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="shop.html">Shop</a>
+              <a class="nav-link " href="shop.php">Shop</a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="#">Blog</a>
@@ -21,7 +21,7 @@
             </li>
             <li class="nav-item">
               <a href="account.html"><i class="fa fa-user" aria-hidden="true"></i></a>
-             <a href="cart.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a> 
+             <a href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a> 
             </li>
           </ul>
         </div>
